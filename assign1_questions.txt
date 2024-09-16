@@ -1,0 +1,17 @@
+After you've implemented the code in sat_solver.rkt,
+answer the two questions below.  This portion is
+purely bonus worth up to 15% of the assignment;
+you do not need to complete this for full credit.
+
+1.) How might you extend this to produce a list of
+    all possible soutions, as opposed to one solution?
+
+
+
+
+2.) How might you extend this to produce an efficient
+    generator of all solutions?  Each time the generator
+    is queried, it should produce a new solution.  Being
+    an efficient generator, it should _not_ just simply
+    calculate all solutions at once and iterate over
+    the precalculated solutions.
