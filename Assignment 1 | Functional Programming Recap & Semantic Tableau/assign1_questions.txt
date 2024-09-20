@@ -1,12 +1,13 @@
-After you've implemented the code in sat_solver.rkt,
+After you've implemented the code in sat_solver.py,
 answer the two questions below.  This portion is
 purely bonus worth up to 15% of the assignment;
 you do not need to complete this for full credit.
 
 1.) How might you extend this to produce a list of
-    all possible soutions, as opposed to one solution?
+    all possible solutions, as opposed to one solution?
+	
 
-
+To produce all possible solutions, you would have to update the solve function to evaluate both parts of the OR. The function is evaluated from both sides of the sub-expressions and merges their results into a list of all solutions. For AND, it would evaluate both sub-expressions simultaneously to ensure the conditions are satisfied. This would create a list of all possible solutions by recursively going through every possibility.
 
 
 
@@ -16,11 +17,8 @@ you do not need to complete this for full credit.
     is queried, it should produce a new solution.  Being
     an efficient generator, it should _not_ just simply
     calculate all solutions at once and iterate over
-    the precalculated solutions.
+    the pre-calculated solutions.
 
-
-
-
-
+To create an efficient generator, the function will solve one solution at a time. For OR, it will check each part gradually, providing results only when needed. For AND, results are given only when both sides are true. This way, solutions are found one by one without storing them all at once.
 
 -----------------------------------------------------------------

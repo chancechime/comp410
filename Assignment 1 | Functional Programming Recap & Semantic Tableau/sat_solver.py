@@ -179,8 +179,28 @@ def add_literal(immutable_map, variable, boolean):
 #     If you start needing a lot more code than that, ask for help to make sure
 #     you're still on-track.
 #
+
 def solve(goals, literals):
-    pass
+    if isinstance(goals, Nil):
+        return literals
+    
+    head = goals.head
+    tail = goals.tail
+    
+    if isinstance(head, Literal):
+        new_literals = add_literal(literals, head.variable, head.is_positive)
+        if new_literals is None:
+            return None
+        return solve(tail, new_literals)
+    
+    elif isinstance(head, And):
+        return solve(Cons(head.left, Cons(head.right, tail)), literals)
+    
+    elif isinstance(head, Or):
+        left_result = solve(Cons(head.left, tail), literals)
+        if left_result is None:
+            return solve(Cons(head.right, tail), literals)
+        return left_result
 
 def solve_one(formula):
     return solve(Cons(formula, Nil()), ImmutableMap())
