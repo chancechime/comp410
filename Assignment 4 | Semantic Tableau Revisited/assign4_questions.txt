@@ -1,0 +1,39 @@
+After you've implemented the code in sat_solver.pl,
+answer the questions below.  This portion is
+purely bonus worth up to 15% of the assignment;
+you do not need to complete this for full credit.
+
+1.) The SAT solver from assignment 1 used a list, but
+    no lists are used in the Prolog-based SAT solver.
+    How is this solver able to avoid using lists?
+
+
+    This solver does not use lists. It handles variables and constraints directly using Prolog's built-in unification and backtracking mechanisms. Prolog's logical variables and the ability to backtrack over different variable bindings allow it to explore possible solutions without needing explicit list structures. 
+
+
+------------------------------------
+2.) The SAT solver from assignment 1 used a hash table
+    (i.e., a mapping) from variables to Boolean values.
+    However, no hash tables or maps are used in the
+    Prolog-based SAT solver.  How is this solver able
+    to avoid using hash tables / maps?
+
+
+    This solver manages variable bindings and constraints without using hash tables or maps. It dynamically binds variables to values and can backtrack to previous states when needed, eliminating the need for explicit hash tables or maps.
+
+
+------------------------------------
+3.) The function you implemented for assignment 1
+    returned either a hash table or null, depending
+    on whether or not the solver was dealing with
+    a satisfiable or unsatisfiable formula.  The
+    Prolog-based SAT solver, however, doesn't exactly
+    return anything, but it still produces values.
+    How is the Prolog-based SAT solver producing values?
+    (As a hint, this question is connected to the
+    previous question.)
+
+
+    This solver solves problems by assigning values to variables as it works through the process. It assigns values dynamically and goes back to try different values if there's a problem. This way of working allows the solver to create solutions without explicitly creating data structures.
+
+    

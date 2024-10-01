@@ -48,8 +48,4 @@ addX(coordinate(X, Y), New, coordinate(NewX, Y))
 % Done
 
 % Your implementation of `addX` should allow the
-% following query to succeed:
-%
-% QUERY: addX(coordinate(1, 2), 2, coordinate(3, 2)).
-
-% Finished Assignment 3
+% fol

@@ -8,3 +8,4 @@ user_trunk.yaml
 user.yaml
 tmp
 .trunk
+.DS_Store
