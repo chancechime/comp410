@@ -12,6 +12,7 @@
 % false.
 %
 % Code expectation: 1 line
+myFirst([H|_], H).
 
 
 % 2. TODO: Write a procedure named myLast that takes:
@@ -26,6 +27,10 @@
 % false.
 %
 % Code expectation: ~3 lines
+myLast([H], H).
+myLast([_|T], X) 
+    :- myLast(T, X).
+
 
 
 % 3. TODO: Write a procedure named myInit that takes:
@@ -41,6 +46,9 @@
 % X = [] .
 %
 % Code expectation: ~3 lines
+myInit([_], []).
+myInit([H|T], [H|X]) 
+    :- myInit(T, X).
 
 
 % 4. TODO: Write a procedure named myAppend that takes:
@@ -67,6 +75,9 @@
 % Note that semicolon (;) was repeatedly pressed in the
 % third query above to get all the solutions.
 % Code expectation: ~3 lines
+myAppend([], L, L).
+myAppend([H|T], L, [H|X]) 
+    :- myAppend(T, L, X).
 
 
 
@@ -85,6 +96,10 @@
 % N = 3.
 %
 % Code expectation: ~4 lines
+myLength([], 0).
+myLength([_|T], N) 
+    :- myLength(T, N1), 
+    N is N1 + 1.
 
 
 
@@ -111,6 +126,15 @@
 % succeeds.
 %
 % Code expectation: ~12 lines
+myFlatten([], []).
+myFlatten([H|T], [H|X]) :-
+    \+ is_list(H),
+    myFlatten(T, X).
+myFlatten([H|T], X) :-
+    is_list(H),
+    myFlatten(H, H1),
+    myFlatten(T, T1),
+    myAppend(H1, T1, X).
 
 
 
@@ -140,6 +164,11 @@
 % false.
 %
 % Code expectation: ~5 lines
+insertPosition(L, E, 0, [E|L]).
+insertPosition([H|T], E, N, [H|X]) :-
+    N > 0,
+    N1 is N - 1,
+    insertPosition(T, E, N1, X).
 
 
 % 8. TODO: Write a procedure named insertSorted that takes:
@@ -161,6 +190,12 @@
 % Result = [1, 2, 3, 3, 4] .
 %
 % Code expectation: ~6 lines
+insertSorted([], E, [E]).
+insertSorted([H|T], E, [E, H|T]) :-
+    E =< H.
+insertSorted([H|T], E, [H|X]) :-
+    E > H,
+    insertSorted(T, E, X).
 
 
 
@@ -186,4 +221,7 @@
 % 3.) Empty lists are always sorted
 %
 % Code expectation: ~6 lines
-
+insertionSort([], []).
+insertionSort([H|T], X) :-
+    insertionSort(T, X1),
+    insertSort(X1, H, X).
