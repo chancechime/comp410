@@ -9,3 +9,5 @@ user.yaml
 tmp
 .trunk
 .DS_Store
+.pytest_cache
+.vscode
