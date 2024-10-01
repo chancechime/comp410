@@ -129,3 +129,17 @@ falseTests([false,
             and(or(true, false),
                 or(false, false))]).
 
+runFalseTests([]).
+runFalseTests([H|T]) :-
+    once(eval(H, false)),
+    runFalseTests(T).
+
+runFalseTests :-
+    falseTests(Tests),
+    runFalseTests(Tests).
+
+runTests :-
+    runTrueTests,
+    runFalseTests.
+
+% Finished boolean_evaluator.pl

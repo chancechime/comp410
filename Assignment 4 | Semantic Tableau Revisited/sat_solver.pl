@@ -110,4 +110,16 @@ unsatTests([and(lit(X, positive),
                 lit(X, negative))]). % X && !X
 
 runUnsatTests([]).
-r
+runUnsatTests([H|T]) :-
+    \+ isTrue(H),
+    runUnsatTests(T).
+
+runUnsatTests :-
+    unsatTests(Tests),
+    runUnsatTests(Tests).
+
+runTests :-
+    runSatTests,
+    runUnsatTests.
+
+% Finished sat_solver.pl

@@ -59,4 +59,4 @@ prereq(A, B)
     :- directPrereq(A, C),
     prereq(C, B).
 
-% Fin
+% Finished Assignment 3
