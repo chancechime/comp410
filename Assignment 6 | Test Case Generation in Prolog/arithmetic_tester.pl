@@ -67,6 +67,30 @@
 % T = negate(number(0)) ;
 %
 
+makeTest(0, number(0)).
+makeTest(Depth, number(0)) 
+    :- Depth > 0.
+makeTest(Depth, plus(E1, E2)) 
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTest(D1, E1), 
+    makeTest(D1, E2).
+makeTest(Depth, minus(E1, E2)) 
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTest(D1, E1), 
+    makeTest(D1, E2).
+makeTest(Depth, mult(E1, E2))  
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTest(D1, E1), 
+    makeTest(D1, E2).
+makeTest(Depth, negate(E))
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTest(D1, E).
+
+
 
 % TODO: Write a procedure named makeTestWithNums
 % that takes:
@@ -108,6 +132,29 @@
 % T = negate(number(2)) ;
 % T = negate(number(3)) .
 
+makeTestWithNums(0, [H|_], number(H)).
+makeTestWithNums(Depth, Nums, number(N)) 
+    :- Depth > 0, 
+    member(N, Nums).
+makeTestWithNums(Depth, Nums, plus(E1, E2))
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTestWithNums(D1, Nums, E1), 
+    makeTestWithNums(D1, Nums, E2).
+makeTestWithNums(Depth, Nums, minus(E1, E2))
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTestWithNums(D1, Nums, E1), 
+    makeTestWithNums(D1, Nums, E2).
+makeTestWithNums(Depth, Nums, mult(E1, E2))
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTestWithNums(D1, Nums, E1), 
+    makeTestWithNums(D1, Nums, E2).
+makeTestWithNums(Depth, Nums, negate(E))
+    :- Depth > 0, 
+    D1 is Depth - 1, 
+    makeTestWithNums(D1, Nums, E).
 
 % ---Begin Testing-Related Code---
 
