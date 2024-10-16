@@ -224,4 +224,10 @@ insertSorted([H|T], E, [H|X]) :-
 insertionSort([], []).
 insertionSort([H|T], X) :-
     insertionSort(T, X1),
-    insertSort(X1, H, X).
+    insertSorted(X1, H, X).
+
+sublist([], []).
+sublist([H|T], [H|X]) :-
+    sublist(T, X).
+sublist([_|T], X) :-
+    sublist(T, X).
