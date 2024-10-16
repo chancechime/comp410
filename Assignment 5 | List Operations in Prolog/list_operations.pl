@@ -225,9 +225,3 @@ insertionSort([], []).
 insertionSort([H|T], X) :-
     insertionSort(T, X1),
     insertSorted(X1, H, X).
-
-sublist([], []).
-sublist([H|T], [H|X]) :-
-    sublist(T, X).
-sublist([_|T], X) :-
-    sublist(T, X).
