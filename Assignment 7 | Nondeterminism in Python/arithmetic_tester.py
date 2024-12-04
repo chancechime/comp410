@@ -72,67 +72,36 @@ class Negate(Expression):
     def __hash__(self):
         return 1 + hash(self.subexpression)
 
-# Start of code
+# ! Start of code
+
+OPERATIONS = [Plus, Minus, Mult] # Make code cleaner
+
+def returnResults(bound, input_list): # Helper since both test have similar actions minus the input_list
+    if bound >= 0:
+        for num in input_list:
+            yield Number(num)
+            for op in OPERATIONS: # Simplifies Operation process
+                for subexp1 in makeTestWithNums(bound - 1, input_list):
+                    yield op(Number(num), subexp1)
+                    yield Negate(subexp1)
+                    for subexp2 in makeTestWithNums(bound - 1, input_list):
+                        yield op(subexp1, subexp2)
 
 # makeTest: Bound
 # Returns an Expression.  Should work the same as with assignment 6, only
 # with Python.  You can use `yield` in Python to return a value from a generator,
 # which additionally pauses execution until the next element is requested from
 # the generator.
-def makeTest(bound):
-    if bound == 0:
-        yield Number(0)
-    else:
-        yield Number(0)
-        for subexpression in makeTest(bound - 1):
-            yield Plus(Number(0), subexpression)
-            yield Minus(Number(0), subexpression)
-            yield Mult(Number(0), subexpression)
-            yield Negate(subexpression)
-            yield Plus(subexpression, Number(0))
-            yield Minus(subexpression, Number(0))
-            yield Mult(subexpression, Number(0))
-            yield Negate(subexpression)
-            for subexpression2 in makeTest(bound - 1):
-                yield Plus(subexpression, subexpression2)
-                yield Minus(subexpression, subexpression2)
-                yield Mult(subexpression, subexpression2)
-                yield Negate(subexpression)
-                yield Plus(subexpression2, subexpression)
-                yield Minus(subexpression2, subexpression)
-                yield Mult(subexpression2, subexpression)
-                yield Negate(subexpression2)
 
+def makeTest(bound):
+    return returnResults(bound, [0])
 
 # makeTestWithNums: Bound, ListOfIntegers
 # Returns an Expression.  Should work the same as with assignment 6.
 def makeTestWithNums(bound, input_list):
-    if bound == 0:
-        for num in input_list:
-            yield Number(num)
-    else:
-        for num in input_list:
-            yield Number(num)
-        for subexpression in makeTestWithNums(bound - 1, input_list):
-            for num in input_list:
-                yield Plus(Number(num), subexpression)
-                yield Minus(Number(num), subexpression)
-                yield Mult(Number(num), subexpression)
-                yield Plus(subexpression, Number(num))
-                yield Minus(subexpression, Number(num))
-                yield Mult(subexpression, Number(num))
-            yield Negate(subexpression)
-        for subexpression1 in makeTestWithNums(bound - 1, input_list):
-            for subexpression2 in makeTestWithNums(bound - 1, input_list):
-                yield Plus(subexpression1, subexpression2)
-                yield Minus(subexpression1, subexpression2)
-                yield Mult(subexpression1, subexpression2)
-                yield Plus(subexpression2, subexpression1)
-                yield Minus(subexpression2, subexpression1)
-                yield Mult(subexpression2, subexpression1)
-            yield Negate(subexpression1)
+    return returnResults(bound, input_list)
             
-# End of code
+# ! End of code
 
 
 def makeTestTest(bound, expected_set):
@@ -393,7 +362,7 @@ def testMakeTestWithNums():
         ),
     )
 
-# Added to run tests
+# Added to run tests faster
 if __name__ == "__main__":
     testMakeTest()
     testMakeTestWithNums()
